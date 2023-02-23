@@ -1,12 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >0.8.0;
 
-import "@codekaburra/asset-withdrawable/contracts/AssetWithdrawable.sol";
 import "./interfaces/INFTCrowdsaleGenerator.sol";
 import "./NFTCrowdsale.sol";
 import "./NFT.sol";
 
-contract NFTCrowdsaleGenerator is INFTCrowdsaleGenerator, AssetWithdrawable {
+contract NFTCrowdsaleGenerator is INFTCrowdsaleGenerator {
     mapping(address => uint256) public indexes; // crowdsale address -> array index in crowdsales
     address[] public crowdsales;
 

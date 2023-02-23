@@ -23,7 +23,6 @@ async function main () {
     },
   ]);
   console.log(`crowdsalesLength ${await contract.crowdsalesLength()}`);
-  console.log(`crowdsales 0 ${await contract.crowdsales(0)}`);
 }
 
 main().catch((error) => {

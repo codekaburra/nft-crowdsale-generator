@@ -3,6 +3,8 @@ import "solidity-coverage";
 import "hardhat-gas-reporter";
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
+import "hardhat-contract-sizer";
+import 'dotenv/config';
 
 const config: HardhatUserConfig = {
   // This is a sample solc configuration that specifies which version of solc to use
@@ -28,6 +30,10 @@ const config: HardhatUserConfig = {
     localhost: {
       url: "http://127.0.0.1:8545",
     },
+    polygon_mumbai: {
+      url: "https://rpc-mumbai.maticvigil.com",
+      accounts: [process.env.PRIVATE_KEY]
+    }
   },
 };
 

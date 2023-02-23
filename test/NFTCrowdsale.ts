@@ -132,7 +132,7 @@ describe("NFTCrowdsale", () => {
               phrase1PresaleConfig.maxMintableNFTsPerAddress,
               phrase1PresaleTree.getHexProof(keccak256(user.address)),
             ),
-            "NFTCrowdsale:mintNFTs: You Are Too Poor ",
+            "NFTCrowdsale:mintNFTs: You Are Too Poor",
           );
         }
       });
@@ -224,7 +224,7 @@ describe("NFTCrowdsale", () => {
               phrase2PresaleConfig.maxMintableNFTsPerAddress,
               phrase2PresaleTree.getHexProof(keccak256(user.address)),
             ),
-            "NFTCrowdsale:mintNFTs: You Are Too Poor ",
+            "NFTCrowdsale:mintNFTs: You Are Too Poor",
           );
         }
       });
@@ -300,7 +300,7 @@ describe("NFTCrowdsale", () => {
               publicSaleConfig.maxMintableNFTsPerAddress,
               [],
             ),
-            "NFTCrowdsale:mintNFTs: You Are Too Poor ",
+            "NFTCrowdsale:mintNFTs: You Are Too Poor",
           );
         }
       });

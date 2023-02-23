@@ -12,7 +12,7 @@ describe("NFT", () => {
   });
 
   beforeEach(async () => {
-    mockContract = await (await ethers.getContractFactory("NFT")).deploy("NFT", "MOCK");
+    mockContract = await (await ethers.getContractFactory("NFT")).deploy("NFT", "MOCK", 10000);
   });
 
   describe("mint/isMinted/enableCrowdsale/disableCrowdsale", () => {
