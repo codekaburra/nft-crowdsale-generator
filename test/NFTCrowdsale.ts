@@ -69,7 +69,7 @@ describe("NFTCrowdsale", () => {
     publicSaleConfig.startTime = phrase2PresaleConfig.startTime.add(phrase2PresaleConfig.durationInSec).add(4 * 60 * 60);
     phrase1PresaleConfig.whitelistedMerklRoot = phrase1PresaleTree.getHexRoot();
     phrase2PresaleConfig.whitelistedMerklRoot = phrase2PresaleTree.getHexRoot();
-    mockNFTContract = await (await ethers.getContractFactory("NFT")).deploy("NFT", "MOCK");
+    mockNFTContract = await (await ethers.getContractFactory("NFT")).deploy("NFT", "MOCK", 10000);
     mockNFTCrowdsaleContract = await (await ethers.getContractFactory("NFTCrowdsale")).deploy(
       paymentToken.address,
       mockNFTContract.address,

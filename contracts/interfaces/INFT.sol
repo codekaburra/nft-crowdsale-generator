@@ -9,7 +9,7 @@ interface INFT is IERC721Enumerable {
     /**
      * @notice maximum supply for this NFT
      */
-    function MAX_SUPPLY() external view returns (uint256);
+    function maxSupply() external view returns (uint256);
 
     /**
      * @notice check if  given crowdsale address is enabled for minting NFT

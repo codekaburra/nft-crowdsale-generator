@@ -77,6 +77,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.INFTCrowdsale__factory>;
     getContractFactory(
+      name: "INFTCrowdsaleGenerator",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.INFTCrowdsaleGenerator__factory>;
+    getContractFactory(
       name: "MockERC20",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.MockERC20__factory>;
@@ -88,6 +92,10 @@ declare module "hardhat/types/runtime" {
       name: "NFTCrowdsale",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.NFTCrowdsale__factory>;
+    getContractFactory(
+      name: "NFTCrowdsaleGenerator",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.NFTCrowdsaleGenerator__factory>;
 
     getContractAt(
       name: "AssetWithdrawable",
@@ -170,6 +178,11 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.INFTCrowdsale>;
     getContractAt(
+      name: "INFTCrowdsaleGenerator",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.INFTCrowdsaleGenerator>;
+    getContractAt(
       name: "MockERC20",
       address: string,
       signer?: ethers.Signer
@@ -184,6 +197,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.NFTCrowdsale>;
+    getContractAt(
+      name: "NFTCrowdsaleGenerator",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.NFTCrowdsaleGenerator>;
 
     // default types
     getContractFactory(

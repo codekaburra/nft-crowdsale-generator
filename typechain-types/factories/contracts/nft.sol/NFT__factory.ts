@@ -119,7 +119,7 @@ const _abi = [
   },
   {
     inputs: [],
-    name: "MAX_SUPPLY",
+    name: "maxSupply",
     outputs: [
       {
         internalType: "uint256",

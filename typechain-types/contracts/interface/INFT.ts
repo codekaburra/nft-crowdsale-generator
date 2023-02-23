@@ -29,7 +29,7 @@ import type {
 
 export interface INFTInterface extends utils.Interface {
   functions: {
-    "MAX_SUPPLY()": FunctionFragment;
+    "maxSupply()": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
     "baseURI()": FunctionFragment;
@@ -54,7 +54,7 @@ export interface INFTInterface extends utils.Interface {
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "MAX_SUPPLY"
+      | "maxSupply"
       | "approve"
       | "balanceOf"
       | "baseURI"
@@ -78,7 +78,7 @@ export interface INFTInterface extends utils.Interface {
   ): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "MAX_SUPPLY",
+    functionFragment: "maxSupply",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -173,7 +173,7 @@ export interface INFTInterface extends utils.Interface {
   ): string;
 
   decodeFunctionResult(
-    functionFragment: "MAX_SUPPLY",
+    functionFragment: "maxSupply",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
@@ -307,7 +307,7 @@ export interface INFT extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    MAX_SUPPLY(overrides?: CallOverrides): Promise<[BigNumber]>;
+    maxSupply(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     approve(
       to: PromiseOrValue<string>,
@@ -416,7 +416,7 @@ export interface INFT extends BaseContract {
     ): Promise<ContractTransaction>;
   };
 
-  MAX_SUPPLY(overrides?: CallOverrides): Promise<BigNumber>;
+  maxSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
   approve(
     to: PromiseOrValue<string>,
@@ -525,7 +525,7 @@ export interface INFT extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    MAX_SUPPLY(overrides?: CallOverrides): Promise<BigNumber>;
+    maxSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
     approve(
       to: PromiseOrValue<string>,
@@ -670,7 +670,7 @@ export interface INFT extends BaseContract {
   };
 
   estimateGas: {
-    MAX_SUPPLY(overrides?: CallOverrides): Promise<BigNumber>;
+    maxSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
     approve(
       to: PromiseOrValue<string>,
@@ -780,7 +780,7 @@ export interface INFT extends BaseContract {
   };
 
   populateTransaction: {
-    MAX_SUPPLY(
+    maxSupply(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

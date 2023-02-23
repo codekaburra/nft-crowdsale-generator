@@ -9,8 +9,8 @@ import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 import "@codekaburra/asset-withdrawable/contracts/AssetWithdrawable.sol";
-import "./interface/INFT.sol";
-import "./interface/INFTCrowdsale.sol";
+import "./interfaces/INFT.sol";
+import "./interfaces/INFTCrowdsale.sol";
 
 /**
  * @notice Crowdsale of NFT
@@ -101,7 +101,7 @@ contract NFTCrowdsale is Ownable, ReentrancyGuard, AssetWithdrawable, INFTCrowds
 
     function _mintNFTs(uint256 _numToMinted) internal {
         require(
-            nft.totalSupply() + _numToMinted <= nft.MAX_SUPPLY(),
+            nft.totalSupply() + _numToMinted <= nft.maxSupply(),
             "NFTCrowdsale:_mintNFTs: Minting would exceed max supply"
         );
         require(_numToMinted > 0, "NFTCrowdsale:_mintNFTs: _numToMinted should be > 0");
@@ -155,7 +155,7 @@ contract NFTCrowdsale is Ownable, ReentrancyGuard, AssetWithdrawable, INFTCrowds
         for (uint8 i = 0; i < lastSalePhraseIndex; i++) {
             totalNumOfMintedNFTs = totalNumOfMintedNFTs + numOfMintedNFTs[i];
         }
-        uint256 numToMinted = nft.MAX_SUPPLY() - totalNumOfMintedNFTs;
+        uint256 numToMinted = nft.maxSupply() - totalNumOfMintedNFTs;
         if (numToMinted > 20) {
             numToMinted = 20;
         }

@@ -4,7 +4,7 @@
 
 import { Contract, Signer, utils } from "ethers";
 import type { Provider } from "@ethersproject/providers";
-import type { INFT, INFTInterface } from "../../../contracts/interface/INFT";
+import type { INFT, INFTInterface } from "../../../contracts/interfaces/INFT";
 
 const _abi = [
   {
@@ -81,19 +81,6 @@ const _abi = [
     ],
     name: "Transfer",
     type: "event",
-  },
-  {
-    inputs: [],
-    name: "maxSupply",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256",
-      },
-    ],
-    stateMutability: "view",
-    type: "function",
   },
   {
     inputs: [
@@ -247,6 +234,19 @@ const _abi = [
         internalType: "bool",
         name: "",
         type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "maxSupply",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
       },
     ],
     stateMutability: "view",

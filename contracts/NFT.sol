@@ -8,7 +8,7 @@ import "@openzeppelin/contracts/security/Pausable.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
-import "./interface/INFT.sol";
+import "./interfaces/INFT.sol";
 
 /**
  * @title NFT in ERC-721 Non-Fungible Token Standard
@@ -18,11 +18,13 @@ import "./interface/INFT.sol";
 contract NFT is ERC721Enumerable, Ownable, ReentrancyGuard, INFT {
     using SafeERC20 for IERC20;
 
-    uint256 public immutable MAX_SUPPLY = 10000;
+    uint256 public maxSupply;
     string public baseURI;
     mapping(address => bool) public crowdsales;
 
-    constructor(string memory _name, string memory _symbol) ERC721(_name, _symbol) {}
+    constructor(string memory _name, string memory _symbol, uint256 _maxSupply) ERC721(_name, _symbol) {
+        maxSupply = _maxSupply;
+    }
 
     modifier onlyCrowdsale() {
         require(crowdsales[msg.sender], "NFT:onlyCrowdsale: only whitelisted & enabled crowdsale allowed");
@@ -31,13 +33,13 @@ contract NFT is ERC721Enumerable, Ownable, ReentrancyGuard, INFT {
 
     function mint(uint256 tokenId, address user) external onlyCrowdsale {
         require(!_exists(tokenId), "NFT:mint: NFT has already been minted");
-        if (tokenId < MAX_SUPPLY) {
+        if (tokenId < maxSupply) {
             _safeMint(user, tokenId);
         }
     }
 
     function isMinted(uint256 tokenId) external view returns (bool) {
-        require(tokenId < MAX_SUPPLY, "NFT:isMinted: tokenId outside collection bounds");
+        require(tokenId < maxSupply, "NFT:isMinted: tokenId outside collection bounds");
         return _exists(tokenId);
     }
 

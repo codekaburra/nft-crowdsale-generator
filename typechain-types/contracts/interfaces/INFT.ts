@@ -25,9 +25,9 @@ import type {
   TypedListener,
   OnEvent,
   PromiseOrValue,
-} from "../common";
+} from "../../common";
 
-export interface NFTInterface extends utils.Interface {
+export interface INFTInterface extends utils.Interface {
   functions: {
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
@@ -40,22 +40,16 @@ export interface NFTInterface extends utils.Interface {
     "isMinted(uint256)": FunctionFragment;
     "maxSupply()": FunctionFragment;
     "mint(uint256,address)": FunctionFragment;
-    "name()": FunctionFragment;
-    "owner()": FunctionFragment;
     "ownerOf(uint256)": FunctionFragment;
-    "renounceOwnership()": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "safeTransferFrom(address,address,uint256,bytes)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
     "setBaseURI(string)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
-    "symbol()": FunctionFragment;
     "tokenByIndex(uint256)": FunctionFragment;
     "tokenOfOwnerByIndex(address,uint256)": FunctionFragment;
-    "tokenURI(uint256)": FunctionFragment;
     "totalSupply()": FunctionFragment;
     "transferFrom(address,address,uint256)": FunctionFragment;
-    "transferOwnership(address)": FunctionFragment;
   };
 
   getFunction(
@@ -71,22 +65,16 @@ export interface NFTInterface extends utils.Interface {
       | "isMinted"
       | "maxSupply"
       | "mint"
-      | "name"
-      | "owner"
       | "ownerOf"
-      | "renounceOwnership"
       | "safeTransferFrom(address,address,uint256)"
       | "safeTransferFrom(address,address,uint256,bytes)"
       | "setApprovalForAll"
       | "setBaseURI"
       | "supportsInterface"
-      | "symbol"
       | "tokenByIndex"
       | "tokenOfOwnerByIndex"
-      | "tokenURI"
       | "totalSupply"
       | "transferFrom"
-      | "transferOwnership"
   ): FunctionFragment;
 
   encodeFunctionData(
@@ -127,15 +115,9 @@ export interface NFTInterface extends utils.Interface {
     functionFragment: "mint",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
   ): string;
-  encodeFunctionData(functionFragment: "name", values?: undefined): string;
-  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "ownerOf",
     values: [PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "renounceOwnership",
-    values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "safeTransferFrom(address,address,uint256)",
@@ -166,7 +148,6 @@ export interface NFTInterface extends utils.Interface {
     functionFragment: "supportsInterface",
     values: [PromiseOrValue<BytesLike>]
   ): string;
-  encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "tokenByIndex",
     values: [PromiseOrValue<BigNumberish>]
@@ -174,10 +155,6 @@ export interface NFTInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "tokenOfOwnerByIndex",
     values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "tokenURI",
-    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "totalSupply",
@@ -190,10 +167,6 @@ export interface NFTInterface extends utils.Interface {
       PromiseOrValue<string>,
       PromiseOrValue<BigNumberish>
     ]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "transferOwnership",
-    values: [PromiseOrValue<string>]
   ): string;
 
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
@@ -219,13 +192,7 @@ export interface NFTInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "isMinted", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "maxSupply", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "ownerOf", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "renounceOwnership",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(
     functionFragment: "safeTransferFrom(address,address,uint256)",
     data: BytesLike
@@ -243,7 +210,6 @@ export interface NFTInterface extends utils.Interface {
     functionFragment: "supportsInterface",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "tokenByIndex",
     data: BytesLike
@@ -252,7 +218,6 @@ export interface NFTInterface extends utils.Interface {
     functionFragment: "tokenOfOwnerByIndex",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "tokenURI", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "totalSupply",
     data: BytesLike
@@ -261,21 +226,15 @@ export interface NFTInterface extends utils.Interface {
     functionFragment: "transferFrom",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "transferOwnership",
-    data: BytesLike
-  ): Result;
 
   events: {
     "Approval(address,address,uint256)": EventFragment;
     "ApprovalForAll(address,address,bool)": EventFragment;
-    "OwnershipTransferred(address,address)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ApprovalForAll"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
 }
 
@@ -303,18 +262,6 @@ export type ApprovalForAllEvent = TypedEvent<
 
 export type ApprovalForAllEventFilter = TypedEventFilter<ApprovalForAllEvent>;
 
-export interface OwnershipTransferredEventObject {
-  previousOwner: string;
-  newOwner: string;
-}
-export type OwnershipTransferredEvent = TypedEvent<
-  [string, string],
-  OwnershipTransferredEventObject
->;
-
-export type OwnershipTransferredEventFilter =
-  TypedEventFilter<OwnershipTransferredEvent>;
-
 export interface TransferEventObject {
   from: string;
   to: string;
@@ -327,12 +274,12 @@ export type TransferEvent = TypedEvent<
 
 export type TransferEventFilter = TypedEventFilter<TransferEvent>;
 
-export interface NFT extends BaseContract {
+export interface INFT extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
   attach(addressOrName: string): this;
   deployed(): Promise<this>;
 
-  interface: NFTInterface;
+  interface: INFTInterface;
 
   queryFilter<TEvent extends TypedEvent>(
     event: TypedEventFilter<TEvent>,
@@ -363,12 +310,12 @@ export interface NFT extends BaseContract {
     balanceOf(
       owner: PromiseOrValue<string>,
       overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
+    ): Promise<[BigNumber] & { balance: BigNumber }>;
 
     baseURI(overrides?: CallOverrides): Promise<[string]>;
 
     crowdsales(
-      arg0: PromiseOrValue<string>,
+      crowdsale: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
@@ -385,7 +332,7 @@ export interface NFT extends BaseContract {
     getApproved(
       tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<[string]>;
+    ): Promise<[string] & { operator: string }>;
 
     isApprovedForAll(
       owner: PromiseOrValue<string>,
@@ -406,18 +353,10 @@ export interface NFT extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    name(overrides?: CallOverrides): Promise<[string]>;
-
-    owner(overrides?: CallOverrides): Promise<[string]>;
-
     ownerOf(
       tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<[string]>;
-
-    renounceOwnership(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
+    ): Promise<[string] & { owner: string }>;
 
     "safeTransferFrom(address,address,uint256)"(
       from: PromiseOrValue<string>,
@@ -430,13 +369,13 @@ export interface NFT extends BaseContract {
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       tokenId: PromiseOrValue<BigNumberish>,
-      _data: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     setApprovalForAll(
       operator: PromiseOrValue<string>,
-      approved: PromiseOrValue<boolean>,
+      _approved: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -450,8 +389,6 @@ export interface NFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
-    symbol(overrides?: CallOverrides): Promise<[string]>;
-
     tokenByIndex(
       index: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -461,12 +398,7 @@ export interface NFT extends BaseContract {
       owner: PromiseOrValue<string>,
       index: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<[BigNumber]>;
-
-    tokenURI(
-      tokenId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<[string]>;
+    ): Promise<[BigNumber] & { tokenId: BigNumber }>;
 
     totalSupply(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -474,11 +406,6 @@ export interface NFT extends BaseContract {
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       tokenId: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<ContractTransaction>;
-
-    transferOwnership(
-      newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
@@ -497,7 +424,7 @@ export interface NFT extends BaseContract {
   baseURI(overrides?: CallOverrides): Promise<string>;
 
   crowdsales(
-    arg0: PromiseOrValue<string>,
+    crowdsale: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<boolean>;
 
@@ -535,18 +462,10 @@ export interface NFT extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  name(overrides?: CallOverrides): Promise<string>;
-
-  owner(overrides?: CallOverrides): Promise<string>;
-
   ownerOf(
     tokenId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<string>;
-
-  renounceOwnership(
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
 
   "safeTransferFrom(address,address,uint256)"(
     from: PromiseOrValue<string>,
@@ -559,13 +478,13 @@ export interface NFT extends BaseContract {
     from: PromiseOrValue<string>,
     to: PromiseOrValue<string>,
     tokenId: PromiseOrValue<BigNumberish>,
-    _data: PromiseOrValue<BytesLike>,
+    data: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   setApprovalForAll(
     operator: PromiseOrValue<string>,
-    approved: PromiseOrValue<boolean>,
+    _approved: PromiseOrValue<boolean>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -579,8 +498,6 @@ export interface NFT extends BaseContract {
     overrides?: CallOverrides
   ): Promise<boolean>;
 
-  symbol(overrides?: CallOverrides): Promise<string>;
-
   tokenByIndex(
     index: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
@@ -592,22 +509,12 @@ export interface NFT extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  tokenURI(
-    tokenId: PromiseOrValue<BigNumberish>,
-    overrides?: CallOverrides
-  ): Promise<string>;
-
   totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
   transferFrom(
     from: PromiseOrValue<string>,
     to: PromiseOrValue<string>,
     tokenId: PromiseOrValue<BigNumberish>,
-    overrides?: Overrides & { from?: PromiseOrValue<string> }
-  ): Promise<ContractTransaction>;
-
-  transferOwnership(
-    newOwner: PromiseOrValue<string>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -626,7 +533,7 @@ export interface NFT extends BaseContract {
     baseURI(overrides?: CallOverrides): Promise<string>;
 
     crowdsales(
-      arg0: PromiseOrValue<string>,
+      crowdsale: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
@@ -664,16 +571,10 @@ export interface NFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
-    name(overrides?: CallOverrides): Promise<string>;
-
-    owner(overrides?: CallOverrides): Promise<string>;
-
     ownerOf(
       tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<string>;
-
-    renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
     "safeTransferFrom(address,address,uint256)"(
       from: PromiseOrValue<string>,
@@ -686,13 +587,13 @@ export interface NFT extends BaseContract {
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       tokenId: PromiseOrValue<BigNumberish>,
-      _data: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     setApprovalForAll(
       operator: PromiseOrValue<string>,
-      approved: PromiseOrValue<boolean>,
+      _approved: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -706,8 +607,6 @@ export interface NFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    symbol(overrides?: CallOverrides): Promise<string>;
-
     tokenByIndex(
       index: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -719,22 +618,12 @@ export interface NFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    tokenURI(
-      tokenId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<string>;
-
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
     transferFrom(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       tokenId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    transferOwnership(
-      newOwner: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -761,15 +650,6 @@ export interface NFT extends BaseContract {
       operator?: PromiseOrValue<string> | null,
       approved?: null
     ): ApprovalForAllEventFilter;
-
-    "OwnershipTransferred(address,address)"(
-      previousOwner?: PromiseOrValue<string> | null,
-      newOwner?: PromiseOrValue<string> | null
-    ): OwnershipTransferredEventFilter;
-    OwnershipTransferred(
-      previousOwner?: PromiseOrValue<string> | null,
-      newOwner?: PromiseOrValue<string> | null
-    ): OwnershipTransferredEventFilter;
 
     "Transfer(address,address,uint256)"(
       from?: PromiseOrValue<string> | null,
@@ -798,7 +678,7 @@ export interface NFT extends BaseContract {
     baseURI(overrides?: CallOverrides): Promise<BigNumber>;
 
     crowdsales(
-      arg0: PromiseOrValue<string>,
+      crowdsale: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -836,17 +716,9 @@ export interface NFT extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    name(overrides?: CallOverrides): Promise<BigNumber>;
-
-    owner(overrides?: CallOverrides): Promise<BigNumber>;
-
     ownerOf(
       tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
-    renounceOwnership(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "safeTransferFrom(address,address,uint256)"(
@@ -860,13 +732,13 @@ export interface NFT extends BaseContract {
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       tokenId: PromiseOrValue<BigNumberish>,
-      _data: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     setApprovalForAll(
       operator: PromiseOrValue<string>,
-      approved: PromiseOrValue<boolean>,
+      _approved: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -880,8 +752,6 @@ export interface NFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    symbol(overrides?: CallOverrides): Promise<BigNumber>;
-
     tokenByIndex(
       index: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -893,22 +763,12 @@ export interface NFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    tokenURI(
-      tokenId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<BigNumber>;
-
     totalSupply(overrides?: CallOverrides): Promise<BigNumber>;
 
     transferFrom(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       tokenId: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<BigNumber>;
-
-    transferOwnership(
-      newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
@@ -928,7 +788,7 @@ export interface NFT extends BaseContract {
     baseURI(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     crowdsales(
-      arg0: PromiseOrValue<string>,
+      crowdsale: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -966,17 +826,9 @@ export interface NFT extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     ownerOf(
       tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    renounceOwnership(
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "safeTransferFrom(address,address,uint256)"(
@@ -990,13 +842,13 @@ export interface NFT extends BaseContract {
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       tokenId: PromiseOrValue<BigNumberish>,
-      _data: PromiseOrValue<BytesLike>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     setApprovalForAll(
       operator: PromiseOrValue<string>,
-      approved: PromiseOrValue<boolean>,
+      _approved: PromiseOrValue<boolean>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -1010,8 +862,6 @@ export interface NFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    symbol(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     tokenByIndex(
       index: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
@@ -1023,22 +873,12 @@ export interface NFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    tokenURI(
-      tokenId: PromiseOrValue<BigNumberish>,
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     totalSupply(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     transferFrom(
       from: PromiseOrValue<string>,
       to: PromiseOrValue<string>,
       tokenId: PromiseOrValue<BigNumberish>,
-      overrides?: Overrides & { from?: PromiseOrValue<string> }
-    ): Promise<PopulatedTransaction>;
-
-    transferOwnership(
-      newOwner: PromiseOrValue<string>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
