@@ -1,0 +1,10 @@
+type CrowdsaleCreated @entity(immutable: true) {
+  id: Bytes!
+  crowdsale: Bytes! # address
+  nft: Bytes! # address
+  arrayIndex: BigInt! # uint256
+  owner: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
