@@ -1,3 +1,38 @@
+
+type NFTCrowdsaleGenerator @entity(immutable: true) {
+  id: Bytes! # address
+  crowdsales: [NFTCrowdsale!]! @derivedFrom(field: "generator")
+}
+
+
+type NFTCrowdsale @entity(immutable: true) {
+  id: Bytes! # address
+  generator: NFTCrowdsaleGenerator!
+  arrayIndexAtGenerator: BigInt! # uint256
+  nft: NFT!
+  owner: Bytes! # address
+  salePhrases: [NFTCrowdsaleSalePhrase!]! @derivedFrom(field: "crowdsale")
+}
+
+type NFTCrowdsaleSalePhrase @entity(immutable: true) {
+  id: Bytes! # NFTCrowdsale address - SalePhraseIndex
+  crowdsale: NFTCrowdsale!
+  salePhraseIndex: Int! # uint8
+  startTime: BigInt! # uint256
+  durationInSec: BigInt! # uint256
+  maxMintableNFTs: BigInt! # uint256
+  maxMintableNFTsPerAddress: BigInt! # uint256
+  price: BigInt! # uint256
+  whitelistedMerklRoot: Bytes! # bytes32
+}
+
+type NFT @entity(immutable: true) {
+  id: Bytes! # address
+  crowdsales: [NFTCrowdsale!]! @derivedFrom(field: "nft")
+}
+
+
+
 type CrowdsaleCreated @entity(immutable: true) {
   id: Bytes!
   crowdsale: Bytes! # address

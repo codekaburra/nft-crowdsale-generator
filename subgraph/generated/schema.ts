@@ -11,6 +11,281 @@ import {
   BigDecimal
 } from "@graphprotocol/graph-ts";
 
+export class NFTCrowdsaleGenerator extends Entity {
+  constructor(id: Bytes) {
+    super();
+    this.set("id", Value.fromBytes(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(
+      id != null,
+      "Cannot save NFTCrowdsaleGenerator entity without an ID"
+    );
+    if (id) {
+      assert(
+        id.kind == ValueKind.BYTES,
+        `Entities of type NFTCrowdsaleGenerator must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("NFTCrowdsaleGenerator", id.toBytes().toHexString(), this);
+    }
+  }
+
+  static load(id: Bytes): NFTCrowdsaleGenerator | null {
+    return changetype<NFTCrowdsaleGenerator | null>(
+      store.get("NFTCrowdsaleGenerator", id.toHexString())
+    );
+  }
+
+  get id(): Bytes {
+    let value = this.get("id");
+    return value!.toBytes();
+  }
+
+  set id(value: Bytes) {
+    this.set("id", Value.fromBytes(value));
+  }
+
+  get crowdsales(): Array<Bytes> {
+    let value = this.get("crowdsales");
+    return value!.toBytesArray();
+  }
+
+  set crowdsales(value: Array<Bytes>) {
+    this.set("crowdsales", Value.fromBytesArray(value));
+  }
+}
+
+export class NFTCrowdsale extends Entity {
+  constructor(id: Bytes) {
+    super();
+    this.set("id", Value.fromBytes(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save NFTCrowdsale entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.BYTES,
+        `Entities of type NFTCrowdsale must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("NFTCrowdsale", id.toBytes().toHexString(), this);
+    }
+  }
+
+  static load(id: Bytes): NFTCrowdsale | null {
+    return changetype<NFTCrowdsale | null>(
+      store.get("NFTCrowdsale", id.toHexString())
+    );
+  }
+
+  get id(): Bytes {
+    let value = this.get("id");
+    return value!.toBytes();
+  }
+
+  set id(value: Bytes) {
+    this.set("id", Value.fromBytes(value));
+  }
+
+  get generator(): Bytes {
+    let value = this.get("generator");
+    return value!.toBytes();
+  }
+
+  set generator(value: Bytes) {
+    this.set("generator", Value.fromBytes(value));
+  }
+
+  get arrayIndexAtGenerator(): BigInt {
+    let value = this.get("arrayIndexAtGenerator");
+    return value!.toBigInt();
+  }
+
+  set arrayIndexAtGenerator(value: BigInt) {
+    this.set("arrayIndexAtGenerator", Value.fromBigInt(value));
+  }
+
+  get nft(): Bytes {
+    let value = this.get("nft");
+    return value!.toBytes();
+  }
+
+  set nft(value: Bytes) {
+    this.set("nft", Value.fromBytes(value));
+  }
+
+  get owner(): Bytes {
+    let value = this.get("owner");
+    return value!.toBytes();
+  }
+
+  set owner(value: Bytes) {
+    this.set("owner", Value.fromBytes(value));
+  }
+
+  get salePhrases(): Array<Bytes> {
+    let value = this.get("salePhrases");
+    return value!.toBytesArray();
+  }
+
+  set salePhrases(value: Array<Bytes>) {
+    this.set("salePhrases", Value.fromBytesArray(value));
+  }
+}
+
+export class NFTCrowdsaleSalePhrase extends Entity {
+  constructor(id: Bytes) {
+    super();
+    this.set("id", Value.fromBytes(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(
+      id != null,
+      "Cannot save NFTCrowdsaleSalePhrase entity without an ID"
+    );
+    if (id) {
+      assert(
+        id.kind == ValueKind.BYTES,
+        `Entities of type NFTCrowdsaleSalePhrase must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("NFTCrowdsaleSalePhrase", id.toBytes().toHexString(), this);
+    }
+  }
+
+  static load(id: Bytes): NFTCrowdsaleSalePhrase | null {
+    return changetype<NFTCrowdsaleSalePhrase | null>(
+      store.get("NFTCrowdsaleSalePhrase", id.toHexString())
+    );
+  }
+
+  get id(): Bytes {
+    let value = this.get("id");
+    return value!.toBytes();
+  }
+
+  set id(value: Bytes) {
+    this.set("id", Value.fromBytes(value));
+  }
+
+  get crowdsale(): Bytes {
+    let value = this.get("crowdsale");
+    return value!.toBytes();
+  }
+
+  set crowdsale(value: Bytes) {
+    this.set("crowdsale", Value.fromBytes(value));
+  }
+
+  get salePhraseIndex(): i32 {
+    let value = this.get("salePhraseIndex");
+    return value!.toI32();
+  }
+
+  set salePhraseIndex(value: i32) {
+    this.set("salePhraseIndex", Value.fromI32(value));
+  }
+
+  get startTime(): BigInt {
+    let value = this.get("startTime");
+    return value!.toBigInt();
+  }
+
+  set startTime(value: BigInt) {
+    this.set("startTime", Value.fromBigInt(value));
+  }
+
+  get durationInSec(): BigInt {
+    let value = this.get("durationInSec");
+    return value!.toBigInt();
+  }
+
+  set durationInSec(value: BigInt) {
+    this.set("durationInSec", Value.fromBigInt(value));
+  }
+
+  get maxMintableNFTs(): BigInt {
+    let value = this.get("maxMintableNFTs");
+    return value!.toBigInt();
+  }
+
+  set maxMintableNFTs(value: BigInt) {
+    this.set("maxMintableNFTs", Value.fromBigInt(value));
+  }
+
+  get maxMintableNFTsPerAddress(): BigInt {
+    let value = this.get("maxMintableNFTsPerAddress");
+    return value!.toBigInt();
+  }
+
+  set maxMintableNFTsPerAddress(value: BigInt) {
+    this.set("maxMintableNFTsPerAddress", Value.fromBigInt(value));
+  }
+
+  get price(): BigInt {
+    let value = this.get("price");
+    return value!.toBigInt();
+  }
+
+  set price(value: BigInt) {
+    this.set("price", Value.fromBigInt(value));
+  }
+
+  get whitelistedMerklRoot(): Bytes {
+    let value = this.get("whitelistedMerklRoot");
+    return value!.toBytes();
+  }
+
+  set whitelistedMerklRoot(value: Bytes) {
+    this.set("whitelistedMerklRoot", Value.fromBytes(value));
+  }
+}
+
+export class NFT extends Entity {
+  constructor(id: Bytes) {
+    super();
+    this.set("id", Value.fromBytes(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save NFT entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.BYTES,
+        `Entities of type NFT must have an ID of type Bytes but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("NFT", id.toBytes().toHexString(), this);
+    }
+  }
+
+  static load(id: Bytes): NFT | null {
+    return changetype<NFT | null>(store.get("NFT", id.toHexString()));
+  }
+
+  get id(): Bytes {
+    let value = this.get("id");
+    return value!.toBytes();
+  }
+
+  set id(value: Bytes) {
+    this.set("id", Value.fromBytes(value));
+  }
+
+  get crowdsales(): Array<Bytes> {
+    let value = this.get("crowdsales");
+    return value!.toBytesArray();
+  }
+
+  set crowdsales(value: Array<Bytes>) {
+    this.set("crowdsales", Value.fromBytesArray(value));
+  }
+}
+
 export class CrowdsaleCreated extends Entity {
   constructor(id: Bytes) {
     super();
