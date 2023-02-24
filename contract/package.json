@@ -20,7 +20,8 @@
     "@openzeppelin/contracts": "4.4.2",
     "@openzeppelin/contracts-upgradeable": "4.4.2",
     "@openzeppelin/test-helpers": "0.5.16",
-    "dotenv": "11.0.0"
+    "dotenv": "11.0.0",
+    "moment": "^2.29.4"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-chai-matchers": "1.0.6",

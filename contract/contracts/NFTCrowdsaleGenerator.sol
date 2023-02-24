@@ -44,6 +44,7 @@ contract NFTCrowdsaleGenerator is INFTCrowdsaleGenerator {
         arrayIndex = crowdsales.length;
         indexes[crowdsale] = arrayIndex;
         crowdsales.push(crowdsale);
+        NFT(nft).enableCrowdsale(crowdsale);
         NFT(nft).transferOwnership(msg.sender);
         NFTCrowdsale(crowdsale).transferOwnership(msg.sender);
         emit CrowdsaleCreated(crowdsale, nft, arrayIndex, msg.sender);
