@@ -6,7 +6,7 @@ dataSources:
     name: NFTCrowdsaleGenerator
     network: mumbai
     source:
-      address: "0x0353B319d2601f4f92b3279c58b3Ee908E97F53d"
+      address: "0x170Ffc21fcc8B7ef2479AE3b02E95aE545Ef1834"
       abi: NFTCrowdsaleGenerator
       startBlock: 032326140
     mapping:
@@ -22,3 +22,58 @@ dataSources:
         - event: CrowdsaleCreated(indexed address,indexed address,indexed uint256,address)
           handler: handleCrowdsaleCreated
       file: ./src/nft-crowdsale-generator.ts
+templates:
+  - kind: ethereum
+    name: NFTCrowdsale
+    network: mumbai
+    source:
+      abi: NFTCrowdsale
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - MintedNFTs
+        - MintedRemainingNFTs
+        - OwnershipTransferred
+        - SetSale
+      abis:
+        - name: NFTCrowdsale
+          file: ./abis/NFTCrowdsale.json
+      eventHandlers:
+        - event: MintedNFTs(indexed uint8,indexed address,uint256,uint256)
+          handler: handleMintedNFTs
+        - event: MintedRemainingNFTs(indexed address,uint256)
+          handler: handleMintedRemainingNFTs
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: SetSale(uint8,uint256,uint256,uint256,uint256,uint256,bytes32)
+          handler: handleSetSale
+      file: ./src/nft-crowdsale.ts
+  - kind: ethereum
+    name: NFT
+    network: mumbai
+    source:
+      abi: NFT
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - ApprovalForAll
+        - OwnershipTransferred
+        - Transfer
+      abis:
+        - name: NFT
+          file: ./abis/NFT.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,indexed uint256)
+          handler: handleApproval
+        - event: ApprovalForAll(indexed address,indexed address,bool)
+          handler: handleApprovalForAll
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+      file: ./src/nft.ts

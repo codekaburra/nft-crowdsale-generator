@@ -1,5 +1,6 @@
 import { CrowdsaleCreated as CrowdsaleCreatedEvent } from "../generated/NFTCrowdsaleGenerator/NFTCrowdsaleGenerator"
 import { CrowdsaleCreated } from "../generated/schema"
+import { NFTCrowdsale } from "../generated/templates";
 
 export function handleCrowdsaleCreated(event: CrowdsaleCreatedEvent): void {
   let entity = new CrowdsaleCreated(
@@ -15,4 +16,6 @@ export function handleCrowdsaleCreated(event: CrowdsaleCreatedEvent): void {
   entity.transactionHash = event.transaction.hash
 
   entity.save()
+
+  NFTCrowdsale.create(event.params.crowdsale);
 }

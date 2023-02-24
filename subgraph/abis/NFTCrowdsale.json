@@ -1,0 +1,426 @@
+[
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_paymentToken", "type": "address" },
+      { "internalType": "address", "name": "_nft", "type": "address" },
+      {
+        "components": [
+          { "internalType": "uint256", "name": "startTime", "type": "uint256" },
+          {
+            "internalType": "uint256",
+            "name": "durationInSec",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maxMintableNFTs",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maxMintableNFTsPerAddress",
+            "type": "uint256"
+          },
+          { "internalType": "uint256", "name": "price", "type": "uint256" },
+          {
+            "internalType": "bytes32",
+            "name": "whitelistedMerklRoot",
+            "type": "bytes32"
+          }
+        ],
+        "internalType": "struct INFTCrowdsale.SalePhrase[]",
+        "name": "_salePhrases",
+        "type": "tuple[]"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "uint8",
+        "name": "_salePhrase",
+        "type": "uint8"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "_address",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "numToMinted",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "costToMint",
+        "type": "uint256"
+      }
+    ],
+    "name": "MintedNFTs",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "_address",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "numToMinted",
+        "type": "uint256"
+      }
+    ],
+    "name": "MintedRemainingNFTs",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "previousOwner",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "OwnershipTransferred",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint8",
+        "name": "salePhraseIndex",
+        "type": "uint8"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "startTime",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "durationInSec",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "maxMintableNFTs",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "maxMintableNFTsPerAddress",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "price",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "bytes32",
+        "name": "whitelistedMerklRoot",
+        "type": "bytes32"
+      }
+    ],
+    "name": "SetSale",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          { "internalType": "uint256", "name": "startTime", "type": "uint256" },
+          {
+            "internalType": "uint256",
+            "name": "durationInSec",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maxMintableNFTs",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maxMintableNFTsPerAddress",
+            "type": "uint256"
+          },
+          { "internalType": "uint256", "name": "price", "type": "uint256" },
+          {
+            "internalType": "bytes32",
+            "name": "whitelistedMerklRoot",
+            "type": "bytes32"
+          }
+        ],
+        "internalType": "struct INFTCrowdsale.SalePhrase",
+        "name": "_salePhrase",
+        "type": "tuple"
+      },
+      { "internalType": "uint8", "name": "_salePhraseIndex", "type": "uint8" }
+    ],
+    "name": "addSalePhrase",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getCurrentOrComingSalePhrase",
+    "outputs": [{ "internalType": "uint8", "name": "", "type": "uint8" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint8", "name": "_salePhraseIndex", "type": "uint8" }
+    ],
+    "name": "getMintPrice",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint8", "name": "_salePhraseIndex", "type": "uint8" }
+    ],
+    "name": "getSalePhrase",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "uint256", "name": "startTime", "type": "uint256" },
+          {
+            "internalType": "uint256",
+            "name": "durationInSec",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maxMintableNFTs",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maxMintableNFTsPerAddress",
+            "type": "uint256"
+          },
+          { "internalType": "uint256", "name": "price", "type": "uint256" },
+          {
+            "internalType": "bytes32",
+            "name": "whitelistedMerklRoot",
+            "type": "bytes32"
+          }
+        ],
+        "internalType": "struct INFTCrowdsale.SalePhrase",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_address", "type": "address" }
+    ],
+    "name": "getUserMintedTokens",
+    "outputs": [
+      { "internalType": "uint256[]", "name": "", "type": "uint256[]" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint8", "name": "_salePhraseIndex", "type": "uint8" }
+    ],
+    "name": "isSaleActive",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_address", "type": "address" },
+      {
+        "internalType": "bytes32[]",
+        "name": "_merkleProof",
+        "type": "bytes32[]"
+      },
+      { "internalType": "uint8", "name": "_salePhraseIndex", "type": "uint8" }
+    ],
+    "name": "isWhitelistedAddress",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "lastSalePhraseIndex",
+    "outputs": [{ "internalType": "uint8", "name": "", "type": "uint8" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "uint256", "name": "_numToMinted", "type": "uint256" },
+      {
+        "internalType": "bytes32[]",
+        "name": "_merkleProof",
+        "type": "bytes32[]"
+      }
+    ],
+    "name": "mintNFTs",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "mintRemainingNFTs",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "nft",
+    "outputs": [
+      { "internalType": "contract INFT", "name": "", "type": "address" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "uint8", "name": "", "type": "uint8" }],
+    "name": "numOfMintedNFTs",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "owner",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "paymentToken",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "renounceOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "newOwner", "type": "address" }
+    ],
+    "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "components": [
+          { "internalType": "uint256", "name": "startTime", "type": "uint256" },
+          {
+            "internalType": "uint256",
+            "name": "durationInSec",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maxMintableNFTs",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "maxMintableNFTsPerAddress",
+            "type": "uint256"
+          },
+          { "internalType": "uint256", "name": "price", "type": "uint256" },
+          {
+            "internalType": "bytes32",
+            "name": "whitelistedMerklRoot",
+            "type": "bytes32"
+          }
+        ],
+        "internalType": "struct INFTCrowdsale.SalePhrase",
+        "name": "_salePhrase",
+        "type": "tuple"
+      },
+      { "internalType": "uint8", "name": "_salePhraseIndex", "type": "uint8" }
+    ],
+    "name": "updateSalePhrase",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "", "type": "address" },
+      { "internalType": "uint256", "name": "", "type": "uint256" }
+    ],
+    "name": "userMintedTokens",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_address", "type": "address" }
+    ],
+    "name": "userMintedTokensLength",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "_token", "type": "address" },
+      { "internalType": "uint256", "name": "_amount", "type": "uint256" }
+    ],
+    "name": "withdrawAsset",
+    "outputs": [],
+    "stateMutability": "payable",
+    "type": "function"
+  }
+]
