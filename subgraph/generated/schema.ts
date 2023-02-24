@@ -125,15 +125,6 @@ export class NFTCrowdsale extends Entity {
   set owner(value: Bytes) {
     this.set("owner", Value.fromBytes(value));
   }
-
-  get salePhrases(): Array<Bytes> {
-    let value = this.get("salePhrases");
-    return value!.toBytesArray();
-  }
-
-  set salePhrases(value: Array<Bytes>) {
-    this.set("salePhrases", Value.fromBytesArray(value));
-  }
 }
 
 export class NFTCrowdsaleSalePhrase extends Entity {

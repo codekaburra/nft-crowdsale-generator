@@ -11,7 +11,7 @@ type NFTCrowdsale @entity(immutable: true) {
   arrayIndexAtGenerator: BigInt! # uint256
   nft: NFT!
   owner: Bytes! # address
-  salePhrases: [NFTCrowdsaleSalePhrase!]! @derivedFrom(field: "crowdsale")
+  # salePhrases: [NFTCrowdsaleSalePhrase!]! @derivedFrom(field: "crowdsale")
 }
 
 type NFTCrowdsaleSalePhrase @entity(immutable: true) {

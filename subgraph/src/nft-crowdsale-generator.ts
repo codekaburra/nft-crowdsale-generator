@@ -19,8 +19,9 @@ export function handleCrowdsaleCreated(event: CrowdsaleCreatedEvent): void {
   entity.transactionHash = event.transaction.hash
   entity.save()
 
+  getOrCreateNFTCrowdsaleGenerator(event.address);
+
   let nft = new NFT(event.params.nft)
-  nft.crowdsales = []
   nft.save()
 
   let crowdsale = new NFTCrowdsale(
@@ -32,8 +33,4 @@ export function handleCrowdsaleCreated(event: CrowdsaleCreatedEvent): void {
   crowdsale.owner = event.params.owner
   crowdsale.save()
 
-  nft.crowdsales.push(event.params.crowdsale)
-  nft.save()
-
-  let generator = getOrCreateNFTCrowdsaleGenerator(event.address);
 }

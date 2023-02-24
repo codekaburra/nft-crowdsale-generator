@@ -8,10 +8,13 @@ import {
   MintedNFTs,
   MintedRemainingNFTs,
   CrowdsaleOwnershipTransferred,
-  SetSale
+  SetSale,
+  NFTCrowdsale,
+  NFTCrowdsaleSalePhrase
 } from "../../subgraph/generated/schema"
 
 export function handleMintedNFTs(event: MintedNFTsEvent): void {
+  // TODO tag NFT , crowdsale
   let entity = new MintedNFTs(
     event.transaction.hash.concatI32(event.logIndex.toI32())
   )
@@ -76,4 +79,20 @@ export function handleSetSale(event: SetSaleEvent): void {
   entity.transactionHash = event.transaction.hash
 
   entity.save()
+
+
+  let crowdsale = NFTCrowdsale.load(event.address) as NFTCrowdsale;
+
+  let salePhraseId = crowdsale.id.concatI32(event.params.salePhraseIndex)
+  let salePhrase = (NFTCrowdsaleSalePhrase.load(salePhraseId) || new NFTCrowdsaleSalePhrase(salePhraseId)) as NFTCrowdsaleSalePhrase
+  salePhrase.crowdsale = crowdsale.id
+  salePhrase.salePhraseIndex = event.params.salePhraseIndex
+  salePhrase.startTime = event.params.startTime
+  salePhrase.durationInSec = event.params.durationInSec
+  salePhrase.maxMintableNFTs = event.params.maxMintableNFTs
+  salePhrase.maxMintableNFTsPerAddress = event.params.maxMintableNFTsPerAddress
+  salePhrase.price = event.params.price
+  salePhrase.whitelistedMerklRoot = event.params.whitelistedMerklRoot
+  salePhrase.save()
+
 }

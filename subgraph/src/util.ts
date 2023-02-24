@@ -5,7 +5,7 @@ export function getOrCreateNFTCrowdsaleGenerator(id: Address): NFTCrowdsaleGener
   let generator = NFTCrowdsaleGenerator.load(id);
   if (generator === null) {
     generator = new NFTCrowdsaleGenerator(id);
-    generator.crowdsales = [];
+    // generator.crowdsales = [];
     generator.save();
   }
   return generator as NFTCrowdsaleGenerator;
